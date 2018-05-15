@@ -1,3 +1,13 @@
 #backgroundbox {
     background-color:#ccffcc; /* 背景色 */
+    
+  width: 100vw;
+  height: auto;
+  min-height: 100vh;
+   
+  /* 表示するコンテナの大きさに基づいて、背景画像を調整 */
+  background-size: cover;
+  background-position: center;
+  
+  
 }

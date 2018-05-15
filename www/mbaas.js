@@ -11,62 +11,12 @@ var ncmb = new NCMB(mbaas_api_key,mbaas_cli_key);
 
     // 保存先クラスのインスタンスを生成
     //var colorManageClass = new ColorManageClass();
-
-
-function dataSave(){
-
-    // 保存先クラスの作成
-    var ColorManageClass = ncmb.DataStore("ColorManageClass");
-       
-    // 保存先クラスのインスタンスを生成
-    var colorManageClass = new ColorManageClass();
-
-
-    // 値を設定と保存
-    colorManageClass.set("message", "Hello, NCMB!")
-                    .set("colorVal",123)
-                    .save()
-                    .then(function(object){
-                        
-                    // 保存に成功した場合の処理
-                        colorManageClass.setIncrement("colorVal", 1);
-                        return colorManageClass.update(); // 保存したgameScoreオブジェクトを更新
-                    })
-                    .catch(function(err){
-                    // 保存に失敗した場合の処理
-        
-                    });
-         
-}
-
-
-function bgcolorChange(bgcolorCodeVal){
-
-    // 保存先クラスの作成
-    var ColorManageClass = ncmb.DataStore("ColorManageClass");
-       
-    // 保存先クラスのインスタンスを生成
-    var colorManageClass = new ColorManageClass();
     
-    // Red,Orange,Yellow,Green,Blue,Indigo,Violet
-    var bgcolorCodeAry = ['#FF0000','#FF7F00','#FFFF00','#00FF00','#0000FF','#4B0082','#9400D3'];
-    //カラーコード
-    var bgcolorCode = bgcolorCodeAry[bgcolorCodeVal];
-
-
-    // 値を設定と保存
-    colorManageClass.set("colorVal",bgcolorCode)
-                    .save()
-                    .then(function(object){
-                        /*changeBoxColor(bgcolorCode);
-                        alert(bgcolorCode);*/
-                    })
-                    .catch(function(err){
-                    // 保存に失敗した場合の処理
-        
-                    });
-         
+window.onload = function(){
+    //dataFetch();
+    var intervalID = setInterval("dataFetch()", 3000);
 }
+
 
 
 function dataFetch(){
@@ -86,34 +36,10 @@ function dataFetch(){
                         }
                         target.innerHTML = bgcolorCode = object.get("colorVal");
                         changeBoxColor(bgcolorCode);
-                        alert(bgcolorCode);
+                        //alert(bgcolorCode);
                         
                     })
                     .catch(function(err){
                         console.log(err);
                     });
-}
-
-
-function dataUpdate(){
-
-  // 保存先クラスの作成
-    var ColorManageClass = ncmb.DataStore("ColorManageClass");
-
-    // 保存先クラスのインスタンスを生成
-    var colorManageClass = new ColorManageClass();
-    
-    ColorManageClass.equalTo('colorVal', 124)
-                    .fetch()
-                    .then(function(results){
-                                    
-                        results.setIncrement("colorVal", 1);
-                        return results.update(); // 保存したgameScoreオブジェクトを更新
-                        
-                    })
-                    .catch(function(err){
-                        console.log(err);
-                    });
-     
-        
 }
